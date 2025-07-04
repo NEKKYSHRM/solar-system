@@ -76,6 +76,27 @@ body {
   box-shadow: 0 0 4px #00ffe1;
 }
 
+#toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  background: #00ffe1;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 0 10px #00ffe1;
+}
+
+#toggle-btn:hover {
+  background: #0070ff;
+  color: #fff;
+}
+
+
 /* 🌐 Responsive Enhancements */
 @media (max-width: 600px) {
   #controls {
@@ -108,5 +129,14 @@ body {
   .slider-group input[type="range"]::-moz-range-thumb {
     height: 14px;
     width: 14px;
+  }
+
+  #toggle-btn {
+    position: fixed;
+    top: 5vw;
+    max-height: 8vw;
+    padding: 8px 16px;
+    font-size: 12px;
+    left: 10px;
   }
 }

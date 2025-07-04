@@ -1,6 +1,8 @@
+// Importing necessary libraries
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 
+// Setting up the speed controls for each planet
 let mercury_speed = document.getElementById("mercury");
 let venus_speed = document.getElementById("venus");
 let earth_speed = document.getElementById("earth");
@@ -9,13 +11,20 @@ let jupiter_speed = document.getElementById("jupiter");
 let saturn_speed = document.getElementById("saturn");
 let uranus_speed = document.getElementById("uranus");
 let neptune_speed = document.getElementById("neptune");
+const sliders = document.querySelectorAll("input[type='range']");
 
+// Adding event for pause/resume functionality
+let isPaused = false;
+document.getElementById("toggle-btn").addEventListener("click", () => {
+  isPaused = !isPaused;
+  document.getElementById("toggle-btn").textContent = isPaused ? "▶️ Resume" : "⏸ Pause";
+});
 
+// Setting up the asteroid belt
 const asteroidCount = 150;
 const asteroids = [];
 
-const sliders = document.querySelectorAll("input[type='range']");
-
+// Updating the slider labels with their initial values
 sliders.forEach((slider) => {
   const label = document.getElementById(`val-${slider.id}`);
   slider.addEventListener("input", () => {
@@ -23,10 +32,10 @@ sliders.forEach((slider) => {
   });
 });
 
-
+// Setting up the scene, camera, renderer, controls, skybox, sun, and planets
 let scene, camera, renderer, controls, skybox, sun, planets;
 
-// Planet data
+// Defining the planet data with their properties
 const planetData = [
   {
     name: "Mercury",
@@ -103,6 +112,7 @@ const planetData = [
   },
 ];
 
+// Function to create an array of materials for the skybox
 function createMatrixArray() {
   const skyboxImagePath = [
     "./img/sky/space_rt.png", // px
@@ -122,6 +132,7 @@ function createMatrixArray() {
   return materialArray;
 }
 
+// Function to set up the skybox
 function setSkybox() {
   const skyboxGeometry = new THREE.BoxGeometry(1000, 1000, 1000);
   const skyboxMaterial = createMatrixArray();
@@ -129,6 +140,7 @@ function setSkybox() {
   scene.add(skybox);
 }
 
+// Function to initialize the scene, camera, renderer, controls, sun, and planets
 function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -195,6 +207,7 @@ function init() {
   setupSpeedControl("neptune", neptune_speed);
 }
 
+// Function to set up speed control for a specific planet
 function setupSpeedControl(planetName, inputElement) {
   const index = planetData.findIndex((p) => p.name.toLowerCase() === planetName);
   if (index !== -1 && planets[index]) {
@@ -208,30 +221,33 @@ function setupSpeedControl(planetName, inputElement) {
   }
 }
 
-
+// Main animation loop
 function animate(time) {
-  sun.rotation.y += 0.001;
+  if (!isPaused) {
+    sun.rotation.y += 0.001;
 
-  planets.forEach((planet) => {
-    planet.userData.angle += planet.userData.speed;
-    const dist = planet.userData.distance;
-    planet.position.x = Math.cos(planet.userData.angle) * dist;
-    planet.position.z = Math.sin(planet.userData.angle) * dist;
-    planet.rotation.y += 0.01;
-  });
+    planets.forEach((planet) => {
+      planet.userData.angle += planet.userData.speed;
+      const dist = planet.userData.distance;
+      planet.position.x = Math.cos(planet.userData.angle) * dist;
+      planet.position.z = Math.sin(planet.userData.angle) * dist;
+      planet.rotation.y += 0.01;
+    });
 
-  asteroids.forEach((asteroid) => {
-    asteroid.userData.angle += asteroid.userData.speed;
-    const dist = asteroid.userData.distance;
-    asteroid.position.x = Math.cos(asteroid.userData.angle) * dist;
-    asteroid.position.z = Math.sin(asteroid.userData.angle) * dist;
-  });
+    asteroids.forEach((asteroid) => {
+      asteroid.userData.angle += asteroid.userData.speed;
+      const dist = asteroid.userData.distance;
+      asteroid.position.x = Math.cos(asteroid.userData.angle) * dist;
+      asteroid.position.z = Math.sin(asteroid.userData.angle) * dist;
+    });
+  }
 
   controls.update();
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
 
+// function to load planet texture and create a mesh
 function loadPlanetTexture(
   texture,
   radius,
@@ -259,9 +275,7 @@ function loadPlanetTexture(
 init();
 animate(0);
 
-
-
-
+// Function to create asteroids in the asteroid belt
 function createAsteroids() {
   for (let i = 0; i < asteroidCount; i++) {
     const size = Math.random() * 0.3 + 0.1; // Very small
