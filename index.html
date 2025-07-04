@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planet Orbit Simulator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="controls">
+      <h2>🪐 Orbital Speed Control</h2>
+      <div class="slider-group">
+        <label for="mercury">Mercury <span id="val-mercury">100</span></label>
+        <input type="range" id="mercury" min="1" max="100" value="100" />
+      </div>
+      <div class="slider-group">
+        <label for="venus">Venus <span id="val-venus">73</span></label>
+        <input type="range" id="venus" min="1" max="100" value="73" />
+      </div>
+      <div class="slider-group">
+        <label for="earth">Earth <span id="val-earth">62</span></label>
+        <input type="range" id="earth" min="1" max="100" value="62" />
+      </div>
+      <div class="slider-group">
+        <label for="mars">Mars <span id="val-mars">50</span></label>
+        <input type="range" id="mars" min="1" max="100" value="50" />
+      </div>
+      <div class="slider-group">
+        <label for="jupiter">Jupiter <span id="val-jupiter">27</span></label>
+        <input type="range" id="jupiter" min="1" max="100" value="27" />
+      </div>
+      <div class="slider-group">
+        <label for="saturn">Saturn <span id="val-saturn">20</span></label>
+        <input type="range" id="saturn" min="1" max="100" value="20" />
+      </div>
+      <div class="slider-group">
+        <label for="uranus">Uranus <span id="val-uranus">14</span></label>
+        <input type="range" id="uranus" min="1" max="100" value="14" />
+      </div>
+      <div class="slider-group">
+        <label for="neptune">Neptune <span id="val-neptune">11</span></label>
+        <input type="range" id="neptune" min="1" max="100" value="11" />
+      </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
