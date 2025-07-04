@@ -289,7 +289,7 @@ function createAsteroids() {
       speed: Math.random() * 0.001 + 0.0002, // Very slow
       verticalOffset: (Math.random() - 0.5) * 4, // Y offset to simulate 3D belt
     };
-
+ 
     mesh.position.y = mesh.userData.verticalOffset;
     scene.add(mesh);
     asteroids.push(mesh);
