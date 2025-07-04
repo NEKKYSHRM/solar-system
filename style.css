@@ -75,3 +75,38 @@ body {
   cursor: pointer;
   box-shadow: 0 0 4px #00ffe1;
 }
+
+/* 🌐 Responsive Enhancements */
+@media (max-width: 600px) {
+  #controls {
+    width: 95%;
+    padding: 15px;
+    font-size: 14px;
+    top: auto;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #controls h2 {
+    font-size: 18px;
+  }
+
+  .slider-group {
+    margin-bottom: 12px;
+  }
+
+  .slider-group label {
+    font-size: 13px;
+  }
+
+  .slider-group input[type="range"]::-webkit-slider-thumb {
+    height: 14px;
+    width: 14px;
+  }
+
+  .slider-group input[type="range"]::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+  }
+}
